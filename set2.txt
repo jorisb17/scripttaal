@@ -1,0 +1,14 @@
+Label x
+Led red on
+Wait 1000
+Led red off
+Wait 1000
+Led green on
+Wait 1000
+Led green off
+Wait 1000
+Led blue on
+Wait 1000
+Led blue off
+Wait 1000
+Jump x
