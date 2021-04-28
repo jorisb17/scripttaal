@@ -1,23 +1,60 @@
 #include "runtime.hpp"
 
-Runtime::Runtime(uint8_t nGPIO_R, uint8_t nGPIO_G, uint8_t nGPIO_B, uint8_t nGPIO_K, uint8_t nGPIO_L){
-  oRGBLed1.init(nGPIO_R, nGPIO_G, nGPIO_B);
-  oLed1.init(nGPIO_L);
+Runtime::Runtime(uint8_t nGPIO_RGB_R, uint8_t nGPIO_RGB_G, uint8_t nGPIO_RGB_B, uint8_t nGPIO_K, uint8_t nGPIO_LED_Y, 
+  uint8_t nGPIO_LED_R, uint8_t nGPIO_LED_G, uint8_t nGPIO_LED_B){
+
+  oRGBLed1.init(nGPIO_RGB_R, nGPIO_RGB_G, nGPIO_RGB_B);
+  oLedRed.init(nGPIO_LED_R);
+  oLedGreen.init(nGPIO_LED_G);
+  oLedBlue.init(nGPIO_LED_B);
+  oLedYellow.init(nGPIO_LED_Y);
+
   oKnop1.init(nGPIO_K);
 
-  oRGBLed1.off();
-  oLed1.off();
+  oRGBLed1.redOn();
+  oRGBLed1.greenOn();
+
+  oLedBlue.on();
+  oLedRed.on();
+  oLedGreen.on();
+  oLedYellow.on();
+
+  usleep(5000000);
+
+  oRGBLed1.redOff();
+
+  oLedBlue.off();
+  oLedRed.off();
+  oLedGreen.off();
+  oLedYellow.off();
 
   nCommandPos_ = 0;
 }
 
 Runtime::~Runtime(void){
   oRGBLed1.off();
-  oLed1.off();
+  oLedBlue.off();
+  oLedRed.off();
+  oLedGreen.off();
+  oLedYellow.off();
 }
 
-void Runtime::addCommand(vector<string> vCommand){
-  commands_.push_back(vCommand);
+bool Runtime::addCommands(char *file){
+  ifstream list(file);
+  string str;
+  vector<string> line;
+  while (getline(list, str))
+  {
+    try{
+      line = oParser.parse(str);
+      commands_.push_back(line);
+    }catch(invalid_argument& e){
+      cerr << e.what() <<endl;
+      error();
+      return true;
+    }
+  }
+  return false;
 }
 
 void Runtime::run(void){
@@ -66,15 +103,19 @@ void Runtime::knop(string sName, bool bState){
 void Runtime::led(string sName, bool bState){
   if(sName.compare("red") == 0){
     ledRedState_ = bState; 
-    oRGBLed1.redSet(ledRedState_);
+    oLedRed.set(ledRedState_);
   }
   if(sName.compare("green") == 0){
     ledGreenState_ = bState;
-    oRGBLed1.greenSet(ledGreenState_);
+    oLedGreen.set(ledGreenState_);
   }
   if(sName.compare("blue") == 0){
     ledBlueState_ = bState;
-    oRGBLed1.blueSet(ledBlueState_);
+    oLedBlue.set(ledBlueState_);
+  }
+  if(sName.compare("yellow") == 0){
+    ledYellowState_ = bState;
+    oLedYellow.set(ledYellowState_);
   }
 }
   
@@ -108,3 +149,19 @@ void Runtime::wait(int nMilliSeconds){
   usleep(microseconds);
 }
 
+void Runtime::error(void){
+  oRGBLed1.off();
+  int timer = 0;
+  bool flag = true;
+  while(timer < 30){
+    if(flag){
+      oRGBLed1.redOn();
+      flag = false;
+    }else{
+      oRGBLed1.redOff();
+      flag = true;
+    }
+    timer++;
+    wait(1000);
+  }
+}

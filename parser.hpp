@@ -4,6 +4,7 @@
 #define _PARSER_HPP_
 
   #include <iostream>
+  #include <stdexcept>
   #include <stdint.h>
   #include <string>
   #include <vector>
@@ -19,14 +20,10 @@
     public:
       Parser();
       ~Parser();
-      uint8_t parse(string sLine);
-      vector<string> token(uint8_t nIndex);
-      void printTokens();
-      uint8_t getTokenSize();
+      vector<string> parse(string sLine);
     private:
       void tokenize(string &str, char delim, vector<string> &out);
-      bool isLineValid(vector<string> sLine);
-      vector<vector<string>> aToken_;
+      string isLineValid(vector<string> sLine);
       uint8_t nTokenSize_;
   };
 

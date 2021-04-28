@@ -24,31 +24,19 @@ int main(int nArgc, char* aArgv[]) {
 		return 0;
 	}
 
-  
-
   // Initialiseren
   printf("03.b compiler\n\n");
   bcm2835_init();
-  Parser oParser;
-  Runtime oRuntime(RPI_BPLUS_GPIO_J8_11, RPI_BPLUS_GPIO_J8_13, RPI_BPLUS_GPIO_J8_15, RPI_BPLUS_GPIO_J8_18, RPI_BPLUS_GPIO_J8_16);
+  Runtime oRuntime(RPI_BPLUS_GPIO_J8_11, RPI_BPLUS_GPIO_J8_13, RPI_BPLUS_GPIO_J8_15, RPI_BPLUS_GPIO_J8_18, RPI_BPLUS_GPIO_J8_31, 
+    RPI_BPLUS_GPIO_J8_37, RPI_BPLUS_GPIO_J8_29, RPI_BPLUS_GPIO_J8_16);
   
   vector<vector<string>> commands;
-  ifstream file(aArgv[1]);
-  string str;
-  vector<string> line;
 
-  while (getline(file, str))
-  {
-    oParser.parse(str);
-  }
-
-  for(uint8_t i =0; i<oParser.getTokenSize(); i++){
-    oRuntime.addCommand(oParser.token(i));
+  if(oRuntime.addCommands(aArgv[1])){
+    return -1;
   }
 
   oRuntime.run();
-
-  
 
   // Afsluiten
   cout << endl << "Afgesloten :-)" << endl << endl;

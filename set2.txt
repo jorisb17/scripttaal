@@ -1,14 +1,18 @@
 Label x
+Led yellow on
+Wait 100
+Led yellow off
+Wait 100
 Led red on
-Wait 1000
+Wait 100
 Led red off
-Wait 1000
+Wait 100
 Led green on
-Wait 1000
+Wait 100
 Led green off
-Wait 1000
+Wait 100
 Led blue on
-Wait 1000
+Wait 100
 Led blue off
-Wait 1000
+Wait 100
 Jump x
