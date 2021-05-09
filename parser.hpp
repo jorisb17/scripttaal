@@ -12,7 +12,7 @@
   using namespace std;
 
   #define PARSER_MAX_TOKENS 5
-  #define PARSER_MAX_TOKENSSIZE 50
+  #define PARSER_MAX_TOKENSSIZE 100
   
 
 
@@ -22,7 +22,8 @@
       ~Parser();
       vector<string> parse(string sLine);
     private:
-      void tokenize(string &str, char delim, vector<string> &out);
+      vector<string> tokenize(string &str, char delim);
+      string sendError(string sLineNumber, string );
       string isLineValid(vector<string> sLine);
       uint8_t nTokenSize_;
   };

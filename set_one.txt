@@ -30,21 +30,4 @@ Wait 1000
 Led red off
 Wait 1000
 Led yellow off
-Led yellow off
-Led yellow off
-Led yellow off
-Led yellow off
-Led yellow off
-Led yellow off
-Led yellow off
-Led yellow off
-Led yellow off
-Led yellow off
-Led yellow off
-Led yellow off
-Led yellow off
-Led yellow off
-Led yellow off
-Led yellow off
-Led yellow off
-Led yellow off
+Wait 1000

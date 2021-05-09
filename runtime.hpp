@@ -22,7 +22,7 @@ class Runtime{
     bool addCommands(char *file);
     void run(void);
   private:
-    void knop(string sName, bool bState);
+    void knop(string sName);
     void led(string sName, bool bState);
     void jump(string sName);
     void wait(int nMilliSeconds);

@@ -10,11 +10,15 @@ Parser::~Parser() {
 
 };
 
-//Tokenize the incomming line
+/** 
+ * @brief Tokenize the incomming line
+ * @param sLine The line to be tokenized
+ * @return A tokenized string
+ * */
 vector<string> Parser::parse(std::string sLine) {
   
   vector<string> tokens;
-  tokenize(sLine, ' ', tokens);
+  tokens = tokenize(sLine, ' ');
 
   uint8_t nTokens = tokens.size();
   if(nTokens < PARSER_MAX_TOKENS){                                        //check if the line isn't greater than PARSER_MAX_TOKENS
@@ -27,11 +31,11 @@ vector<string> Parser::parse(std::string sLine) {
         }
       }
       string msg = isLineValid(tokens);
-      if(msg.compare("NULL") == 0){
+      if(msg == "NULL"){
         nTokenSize_++;                                                     //add 1 to total token size
         return tokens;                                                     //add to token list
       }else{
-        throw invalid_argument(msg);
+        throw invalid_argument(msg);                                       //if error detected, throw an error
       }                                               
     }else{
       throw invalid_argument("Maximum command size reached. Max size = " + to_string(PARSER_MAX_TOKENSSIZE));
@@ -42,37 +46,32 @@ vector<string> Parser::parse(std::string sLine) {
   return {"NULL"};
 };
 
-void Parser::tokenize(string &str, char delim, vector<string> &out){
-	size_t start;
-	size_t end = 0;
-
-	while((start = str.find_first_not_of(delim, end)) != string::npos){
-		end = str.find(delim, start);
-		out.push_back(str.substr(start, end - start));
-	}
-}
-
+/**
+ * @brief Check if tokenized line doesn't contain any errors
+ * @param sLine The tokenized line to be checked
+ * @return if the line is valid
+ * */
 string Parser::isLineValid(vector<string> sLine){
   switch (sLine.size())
   {
   case 4:
-    if(sLine.at(0).compare("Jumpknop") == 0){
-      if((sLine.at(2).compare("ja") == 0) || (sLine.at(2).compare("nee") == 0)){
+    if(sLine.at(0) == "Jumpknop"){
+      if((sLine.at(2) == "ja") || (sLine.at(2) == "nee")){
         return "NULL";
       }else{
         return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
           "Error: " + sLine.at(2) + " is not a Knop state. A Knop state can only be <ja:nee>";
       }
-    }else if(sLine.at(0).compare("Wait") == 0){
+    }else if(sLine.at(0) == "Wait"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
         "Error: too many arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 2";
-    }else if(sLine.at(0).compare("Jump") == 0){
+    }else if(sLine.at(0) == "Jump"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
         "Error: too many arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 2";
-    }else if(sLine.at(0).compare("Label") == 0){
+    }else if(sLine.at(0) == "Label"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
         "Error: too many arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 2";
-    }else if(sLine.at(0).compare("Led") == 0){
+    }else if(sLine.at(0) == "Led"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
         "Error: too many arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 3";
     }else{
@@ -81,23 +80,23 @@ string Parser::isLineValid(vector<string> sLine){
     }
     break;
   case 3:
-    if(sLine.at(0).compare("Led") == 0){
-      if((sLine.at(2).compare("on") == 0) || (sLine.at(2).compare("off") == 0)){
+    if(sLine.at(0) == "Led"){
+      if((sLine.at(2) == "on") || (sLine.at(2) == "off")){
         return "NULL";
       }else{
         return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
           "Error: " + sLine.at(2) + " is not a Led state. A Led state can only be <on:off>";
       }
-    }else if(sLine.at(0).compare("Wait") == 0){
+    }else if(sLine.at(0) == "Wait"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
         "Error: too many arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 2";
-    }else if(sLine.at(0).compare("Jump") == 0){
+    }else if(sLine.at(0) == "Jump"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
         "Error: too many arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 2";
-    }else if(sLine.at(0).compare("Label") == 0){
+    }else if(sLine.at(0) == "Label"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
         "Error: too many arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 2";
-    }else if(sLine.at(0).compare("Jumpknop") == 0){
+    }else if(sLine.at(0) == "Jumpknop"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
         "Error: too few arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 4";
     }else{
@@ -106,16 +105,16 @@ string Parser::isLineValid(vector<string> sLine){
     }
     break;
   case 2:
-    if(sLine.at(0).compare("Wait") == 0){
+    if(sLine.at(0) == "Wait"){
       return "NULL";
-    }else if(sLine.at(0).compare("Jump") == 0){
+    }else if(sLine.at(0) == "Jump"){
       return "NULL";
-    }else if(sLine.at(0).compare("Label") == 0){
+    }else if(sLine.at(0) == "Label"){
       return "NULL";
-    }else if(sLine.at(0).compare("Led") == 0){
+    }else if(sLine.at(0) == "Led"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
         "Error: too few arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 3";
-    }else if(sLine.at(0).compare("Jumpknop") == 0){
+    }else if(sLine.at(0) == "Jumpknop"){
        return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
         "Error: too few arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 4";
     }else{
@@ -124,19 +123,19 @@ string Parser::isLineValid(vector<string> sLine){
     }
     break;
   case 1:
-    if(sLine.at(0).compare("Wait") == 0){
+    if(sLine.at(0) == "Wait"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
         "Error: too few arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 2";
-    }else if(sLine.at(0).compare("Jump") == 0){
+    }else if(sLine.at(0) == "Jump"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
         "Error: too few arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 2";
-    }else if(sLine.at(0).compare("Label") == 0){
+    }else if(sLine.at(0) == "Label"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
         "Error: too few arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 2";
-    }else if(sLine.at(0).compare("Led") == 0){
+    }else if(sLine.at(0) == "Led"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
         "Error: too few arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 3";
-    }else if(sLine.at(0).compare("Jumpknop") == 0){
+    }else if(sLine.at(0) == "Jumpknop"){
        return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
         "Error: too few arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 4";
     }else{
@@ -148,4 +147,15 @@ string Parser::isLineValid(vector<string> sLine){
     return "Error at line " + to_string(nTokenSize_ + 1);
     break;
   }
+}
+
+vector<string> Parser::tokenize(string &str, char delim){
+	size_t start;
+	size_t end = 0;
+  vector<string> out;
+	while((start = str.find_first_not_of(delim, end)) != string::npos){
+		end = str.find(delim, start);
+		out.push_back(str.substr(start, end - start));
+	}
+  return out;
 }
