@@ -60,23 +60,23 @@ string Parser::isLineValid(vector<string> sLine){
         return "NULL";
       }else{
         return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
-          "Error: " + sLine.at(2) + " is not a Knop state. A Knop state can only be <ja:nee>";
+          "Error: '" + sLine.at(2) + "' is not a Knop state. A Knop state can only be <ja:nee>";
       }
     }else if(sLine.at(0) == "Wait"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
-        "Error: too many arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 2";
+        "Error: too many arguments for '" + sLine.at(0) + "'. Arguments size is " + to_string(sLine.size()) + ". This should be 2";
     }else if(sLine.at(0) == "Jump"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
-        "Error: too many arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 2";
+        "Error: too many arguments for '" + sLine.at(0) + "'. Arguments size is " + to_string(sLine.size()) + ". This should be 2";
     }else if(sLine.at(0) == "Label"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
-        "Error: too many arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 2";
+        "Error: too many arguments for '" + sLine.at(0) + "'. Arguments size is " + to_string(sLine.size()) + ". This should be 2";
     }else if(sLine.at(0) == "Led"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
-        "Error: too many arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 3";
+        "Error: too many arguments for '" + sLine.at(0) + "'. Arguments size is " + to_string(sLine.size()) + ". This should be 3";
     }else{
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
-        "Error: " + sLine.at(0) + " is an unknown keyword. Available keywords: <Led:Wait:Jump:Knopjump:Label>";
+        "Error: '" + sLine.at(0) + "' is an unknown keyword. Available keywords: <Led:Wait:Jump:Knopjump:Label>";
     }
     break;
   case 3:
@@ -85,23 +85,23 @@ string Parser::isLineValid(vector<string> sLine){
         return "NULL";
       }else{
         return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
-          "Error: " + sLine.at(2) + " is not a Led state. A Led state can only be <on:off>";
+          "Error: '" + sLine.at(2) + "' is not a Led state. A Led state can only be <on:off>";
       }
     }else if(sLine.at(0) == "Wait"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
-        "Error: too many arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 2";
+        "Error: too many arguments for '" + sLine.at(0) + "'. Arguments size is " + to_string(sLine.size()) + ". This should be 2";
     }else if(sLine.at(0) == "Jump"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
-        "Error: too many arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 2";
+        "Error: too many arguments for '" + sLine.at(0) + "'. Arguments size is " + to_string(sLine.size()) + ". This should be 2";
     }else if(sLine.at(0) == "Label"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
-        "Error: too many arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 2";
+        "Error: too many arguments for '" + sLine.at(0) + "'. Arguments size is " + to_string(sLine.size()) + ". This should be 2";
     }else if(sLine.at(0) == "Jumpknop"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
-        "Error: too few arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 4";
+        "Error: too few arguments for '" + sLine.at(0) + "'. Arguments size is " + to_string(sLine.size()) + ". This should be 4";
     }else{
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
-        "Error: " + sLine.at(0) + " is an unknown keyword. Available keywords: <Led:Wait:Jump:Knopjump:Label>";
+        "Error: '" + sLine.at(0) + "' is an unknown keyword. Available keywords: <Led:Wait:Jump:Knopjump:Label>";
     }
     break;
   case 2:
@@ -113,34 +113,34 @@ string Parser::isLineValid(vector<string> sLine){
       return "NULL";
     }else if(sLine.at(0) == "Led"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
-        "Error: too few arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 3";
+        "Error: too few arguments for '" + sLine.at(0) + "'. Arguments size is " + to_string(sLine.size()) + ". This should be 3";
     }else if(sLine.at(0) == "Jumpknop"){
        return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
-        "Error: too few arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 4";
+        "Error: too few arguments for '" + sLine.at(0) + "'. Arguments size is " + to_string(sLine.size()) + ". This should be 4";
     }else{
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
-        "Error: " + sLine.at(0) + " is an unknown keyword. Available keywords: <Led:Wait:Jump:Knopjump:Label>";
+        "Error: '" + sLine.at(0) + "' is an unknown keyword. Available keywords: <Led:Wait:Jump:Knopjump:Label>";
     }
     break;
   case 1:
     if(sLine.at(0) == "Wait"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
-        "Error: too few arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 2";
+        "Error: too few arguments for '" + sLine.at(0) + "'. Arguments size is " + to_string(sLine.size()) + ". This should be 2";
     }else if(sLine.at(0) == "Jump"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
-        "Error: too few arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 2";
+        "Error: too few arguments for '" + sLine.at(0) + "'. Arguments size is " + to_string(sLine.size()) + ". This should be 2";
     }else if(sLine.at(0) == "Label"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
-        "Error: too few arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 2";
+        "Error: too few arguments for '" + sLine.at(0) + "'. Arguments size is " + to_string(sLine.size()) + ". This should be 2";
     }else if(sLine.at(0) == "Led"){
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
-        "Error: too few arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 3";
+        "Error: too few arguments for '" + sLine.at(0) + "'. Arguments size is " + to_string(sLine.size()) + ". This should be 3";
     }else if(sLine.at(0) == "Jumpknop"){
        return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
-        "Error: too few arguments for " + sLine.at(0) + ". Arguments size is " + to_string(sLine.size()) + ". This should be 4";
+        "Error: too few arguments for '" + sLine.at(0) + "'. Arguments size is " + to_string(sLine.size()) + ". This should be 4";
     }else{
       return "Syntax error at line: " + to_string(nTokenSize_ + 1) + "\n" + 
-        "Error: " + sLine.at(0) + " is an unknown keyword. Available keywords: <Led:Wait:Jump:Knopjump:Label>";
+        "Error: '" + sLine.at(0) + "' is an unknown keyword. Available keywords: <Led:Wait:Jump:Knopjump:Label>";
     }
     break;
   default:

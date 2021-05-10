@@ -30,7 +30,7 @@ Runtime::Runtime(uint8_t nGPIO_RGB_R, uint8_t nGPIO_RGB_G, uint8_t nGPIO_RGB_B, 
   oLedGreen.on();
   oLedYellow.on();
 
-  usleep(2000000);
+  usleep(1000000);
 
   oRGBLed1.redOff();
 
@@ -175,7 +175,7 @@ void Runtime::jump(string sName){
  * */
 void Runtime::jumpKnop(string sName, string sState, string sLabel){
   if(sName == "k1"){
-    knopK1State_ = oKnop1.isPressed();
+    knop(sName);
     if(sState == "ja"){
       if(knopK1State_){
         jump(sLabel);
@@ -206,7 +206,7 @@ void Runtime::error(void){
   oRGBLed1.off();
   int timer = 0;
   bool flag = true;
-  while(timer < 30){
+  while(timer < 10){
     if(flag){
       oRGBLed1.redOn();
       flag = false;

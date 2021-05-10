@@ -33,7 +33,7 @@ int main(int nArgc, char* aArgv[]) {
   oRuntime.run();
 
   // Afsluiten
-  cout << endl << "Afgesloten :-)" << endl << endl;
+  cout << endl << "🛑 Afgesloten 🛑" << endl << endl;
   return 0;
 };
 
