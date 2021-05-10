@@ -174,16 +174,14 @@ void Runtime::jump(string sName){
  * @return void
  * */
 void Runtime::jumpKnop(string sName, string sState, string sLabel){
-  if(sName == "k1"){
-    knop(sName);
-    if(sState == "ja"){
-      if(knopK1State_){
-        jump(sLabel);
-      }
-    }else if(sState == "nee"){
-      if(!knopK1State_){
-        jump(sLabel);
-      }
+  knop(sName);
+  if(sState == "ja"){
+    if(knopK1State_){
+      jump(sLabel);
+    }
+  }else if(sState == "nee"){
+    if(!knopK1State_){
+      jump(sLabel);
     }
   }
 }

@@ -7,7 +7,7 @@ Wait 1000
 Led red off
 Wait 1000
 Label x
-Jumpknopp k1 ja y
+Jumpknop k1 ja y
 Led green on
 Wait 1000
 Led green off
